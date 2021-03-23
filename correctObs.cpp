@@ -40,7 +40,6 @@ class Subject{
         }
         void bajarCantidad(){
             for(totalCant; totalCant > 0; totalCant-=1){
-                //system("cls");
                 cout << "Tiempo: " << totalCant << endl;
                 if(totalCant == minimaCantidad){
                     notificar();
