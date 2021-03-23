@@ -61,6 +61,85 @@ class Mostrar : public IObserver{
             cout << "---" << message << "---" << endl;
         } 
 };
+class Adapter{ //converts the given int into a workable string
+    public: 
+        string conjunction;
+        int current_digit;
+        string wordify(int num){
+            conjunction = "";
+            if (num != 0){
+                bool first = true;
+                while (num > 0){
+                    current_digit = num%10;
+                    switch(current_digit){
+                        case 1:
+                            conjunction = "one" + conjunction;
+                            break;
+                        case 2: 
+                            conjunction = "two" + conjunction;
+                            break;
+                        case 3:
+                            conjunction = "three" + conjunction;
+                            break;
+                        case 4:
+                            conjunction = "four" + conjunction;
+                            break;
+                        case 5:
+                            conjunction = "five" + conjunction;
+                            break;
+                        case 6:
+                            conjunction = "six" + conjunction;
+                            break;
+                        case 7:
+                            conjunction = "seven" + conjunction;
+                            break;
+                        case 8:
+                            conjunction = "eight" + conjunction;
+                            break;
+                        case 9:
+                            conjunction = "nine" + conjunction;
+                            break;
+                        case 0:
+                            conjunction = "zero" + conjunction;
+                            break;
+                    }
+                    if ((num/10)>0){
+                        conjunction = "," + conjunction;
+                    }
+                    num /= 10;
+                } 
+            }
+            else{
+                conjunction += "zero";
+            }
+            conjunction += "!";
+            return conjunction;
+        }
+        
+};
+
+class Word_Maker{ //converts list into three-seven-four
+    public:
+        int i = 0;
+        string new_string;
+        string generate_id(string num){
+            new_string = "[";
+            const std::string s(num);
+            while (s[i] != '!'){
+                if (s[i] == ','){
+                    new_string += "-";
+                }
+                else{
+                    new_string += s[i];
+                }
+                i += 1;
+            }
+            new_string += "]";
+            i = 0;
+            cout<<new_string<<endl;
+            return new_string;
+        }
+};
 
 void iniciar(int valTota, int parada){
     unique_ptr<Subject> subject = make_unique<Subject>(); // we got subject to register all the listeners
@@ -88,17 +167,27 @@ int main(){
                 sleep(2);
                 cout << "Por favor ingrese el valor para el temporizador en segundos: ";
                 cin >> valTot;
-                cout << "s\n";
                 cout << "Por favor ingrese el valor en cual se espera que el observer envie un mensaje. Se enviara a los: ";
                 cin >> valParada;
-                cout << "s\n";
                 cout << "---Iniciando Temporizador---\n";
                 iniciar(valTot, valParada);
                 break;
 
             case 2:
-                cout << "Hola xd\n";
+                {
+                Adapter adapter;
+                Word_Maker new_id;
+                int id;
+                string miString;
+                cout << "Por favor ingrese su numero de carné: ";
+                cin >> id;
+                miString = adapter.wordify(id);
+                cout << "Ahora su carné sera generado en palabras...\n";
+                sleep(2);
+                new_id.generate_id(miString);
+                cout << "\n";
                 break;
+                }
 
             case 3:
                 exit(1);

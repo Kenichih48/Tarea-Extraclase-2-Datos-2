@@ -55,7 +55,6 @@ class Adapter{ //converts the given int into a workable string
                 conjunction += "zero";
             }
             conjunction += "!";
-            cout<<conjunction<<endl;
             return conjunction;
         }
         
