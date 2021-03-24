@@ -141,13 +141,19 @@ class Word_Maker{ //converts list into three-seven-four
 };
 
 void iniciar(int valTota, int parada){
-    unique_ptr<Subject> subject = make_unique<Subject>(); // we got subject to register all the listeners
-    shared_ptr<IObserver> display = make_shared<Mostrar>();
+    if (valTota != 0 && parada!= 0){
+        unique_ptr<Subject> subject = make_unique<Subject>(); // we got subject to register all the listeners
+        shared_ptr<IObserver> display = make_shared<Mostrar>();
 
-    subject -> agregarLista(display);
-    subject ->setTotal(valTota);
-    subject ->setPuntoAccion(parada);
-    subject ->bajarCantidad();
+        subject -> agregarLista(display);
+        subject ->setTotal(valTota);
+        subject ->setPuntoAccion(parada);
+        subject ->bajarCantidad();
+    }
+    else{
+        cout << "Tanto el valor del temporizador como el del observer deben ser mayores a cero...\n" << "Intente de nuevo..." << endl;
+        sleep(2); 
+    }
 }
 
 int main(){
